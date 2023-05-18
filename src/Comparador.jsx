@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import { ClipLoader } from 'react-spinners';
-// import { compareFiles } from './compara';
 
 export const Comparador = () => {
 
@@ -15,13 +14,7 @@ export const Comparador = () => {
     let docRegistros2 = doc2.length;
 
     const [cantidad1, setCantidad1] = useState(0);
-    const [cantidad2, setCantidad2] = useState(0);
-
-    // const [repetidos1, setRepetidos1] = useState([]);
-    // const [repetidos2, setRepetidos2] = useState([]);
-    // let repetidosUno = repetidos1.length;
-    // let repetidosDos = repetidos2.length;
-    
+    const [cantidad2, setCantidad2] = useState(0);    
 
     const handleArchivoSeleccionado = (event) => {
         const archivoSeleccionado = event.target.files[0];
@@ -43,11 +36,6 @@ export const Comparador = () => {
             }
     };
 
-        let missingIn1 = [];
-        let missingIn2 = [];
-        let lines1 = [];
-        let lines2 = [];
-
     //toda la logica de la app
         const compareFiles = () => {
             setLoading(true);
@@ -62,53 +50,25 @@ export const Comparador = () => {
                 const content2 = reader2.result;
           
                 // Separa el contenido de ambos archivos por líneas
-                lines1 = content1.split('\n');
-                lines2 = content2.split('\n');
+                const lines1 = content1.split('\n');
+                const lines2 = content2.split('\n');
           
                 // Verifica si todos los registros del archivo 1 están en el archivo 2
-                // const missingIn2 = [];
                 for (let i = 0; i < lines1.length; i++) {
                   if (!lines2.includes(lines1[i])) {
                     setCantidad1(prevCantidad => prevCantidad + 1);
                     setDoc1(prevDoc1 => [...prevDoc1, lines1[i]]);
                   } else{setCantidad1(prevCantidad => prevCantidad + 1);}
-                //   else{
-                //     setRepetidos1(prevRepetidos1 => [...prevRepetidos1, lines1[i]]);
-                //   }
                 }
           
                 // Verifica si todos los registros del archivo 2 están en el archivo 1
-                // const missingIn1 = [];
                 for (let i = 0; i < lines2.length; i++) {
                   if (!lines1.includes(lines2[i])) {
                     setCantidad2(prevCantidad => prevCantidad + 1);
                     setDoc2(prevDoc2 => [...prevDoc2, lines2[i]]);
                   } else{setCantidad2(prevCantidad => prevCantidad + 1);}
-                //   else {}
-                //   else{
-                //     setRepetidos2(prevRepetidos2 => [...prevRepetidos2, lines2[i]]);
-                //   }
                 }
-                setLoading(false);
-          
-                // Devuelve los registros faltantes en cada archivo
-                // console.table(`archivo 1: ${doc1}`);
-                // console.table(`archivo 2: ${missingIn2}`);
-                // console.log(missingIn1.length);
-        
-                // const doc1 = lines1.length();
-                // const doc2 = lines2.length();
-        
-                // return (
-                //     {
-                //         missingIn1: missingIn1,
-                //         missingIn2: missingIn2
-                //     }
-                            
-                // )
-                            
-                            
-                          
+                setLoading(false);          
                 };
             }
           }
@@ -215,14 +175,6 @@ export const Comparador = () => {
                                 </ul>
                             
                             <br /><br />
-
-                        {/* <h4>Registros repetidos: {repetidosUno}</h4>
-                        <h5>Lista:</h5>
-                            <ol>
-                                {repetidos1.map((item, index) => (
-                                    <li key={index}>{item}</li>
-                                ))}
-                            </ol> */}
                             </div>
                 
 
@@ -238,23 +190,11 @@ export const Comparador = () => {
                             </ul>
                         
                         <br /><br />
-
-{/*                         
-                        <h4>Registros repetidos: {repetidosDos}</h4>
-                        <h5>Lista:</h5>
-                            <ol>
-                                {repetidos2.map((item, index) => (
-                                    <li key={index}>{item}</li>
-                                ))}
-                            </ol> */}
                     </div>
 
              </div>
         </div>
-    </div>
-
-
-           
+    </div>           
         </>
     );
 }
