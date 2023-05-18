@@ -1,0 +1,12 @@
+body {
+    background-color: rgb(243, 220, 240);
+    color: rgb(85, 85, 85);
+  }
+
+.card {
+    background-color: rgb(238, 201, 233);
+}
+
+#engranaje{
+    width: 130px;
+}
