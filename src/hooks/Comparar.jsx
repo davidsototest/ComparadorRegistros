@@ -6,11 +6,12 @@ export const Comparar = ({archivo1, archivo2}) => {
 
     const [doc1, setDoc1] = useState([]);
     const [doc2, setDoc2] = useState([]);
-    const [cantidad1, setCantidad1] = useState(0);
-    const [cantidad2, setCantidad2] = useState(0);
+    const [cantidad1, setCantidad1] = useState(null);
+    const [cantidad2, setCantidad2] = useState(null);
     const [loading, setLoading] = useState(false);
-    let docRegistros1 = doc1.length;
-    let docRegistros2 = doc2.length;
+    const [iguales, setIguales] = useState(false);
+    const [docRegistros1, setDocRegistros1] = useState(0);
+    const [docRegistros2, setDocRegistros2] = useState(0);
 
     //toda la logica de la app
     const compareFiles = () => {
@@ -44,14 +45,30 @@ export const Comparar = ({archivo1, archivo2}) => {
                 setDoc2(prevDoc2 => [...prevDoc2, lines2[i]]);
               } else{setCantidad2(prevCantidad => prevCantidad + 1);}
             }
-            setLoading(false);          
-            };
-        }
+              setLoading(false);     
+          };         
+        }        
       }
 
-    useEffect(() => {
-        compareFiles();
-    }, [archivo1, archivo2]);
+      useEffect(() => {
+        setDocRegistros1(doc1.length);
+      }, [doc1]);
+  
+      useEffect(() => {
+        setDocRegistros2(doc2.length);
+      }, [doc2]);
+
+      useEffect(() => {
+          compareFiles();
+      }, [archivo1, archivo2]);
+
+      useEffect(() => {
+        if ( loading !== true && docRegistros1 === 0 && docRegistros2 === 0 ){
+          setIguales(true);
+        } else{
+          setIguales(false);
+        } 
+      }, [loading, docRegistros1, docRegistros2]);
 
   return (
     <>
@@ -66,14 +83,16 @@ export const Comparar = ({archivo1, archivo2}) => {
                     <h6>Cant. registros totales: {cantidad1}</h6>
                     <h6>Cant. de Registros no encontrados: {docRegistros1}</h6>
                     <br />
-                    <h6>Registros No encontrados:</h6>
+                    {
+                      (docRegistros1 > 0) && (<h6>Registros No encontrados:</h6>)
+                    }
                     <ul>
                         {doc1.map((item, index) => (
                             <li key={index}>{item}</li>
                     ))}
                     </ul>
                 
-                <br /><br />
+                
                 </div>
 
 
@@ -82,17 +101,26 @@ export const Comparar = ({archivo1, archivo2}) => {
                     <h6>Cant. registros totales: {cantidad2}</h6>
                     <h6>Cant. de Registros no encontrados: {docRegistros2}</h6>
                     <br />
-                    <h6>Registros No encontrados:</h6>
+                      {
+                        (docRegistros2 > 0) && (<h6>Registros No encontrados:</h6>)
+                      }
+
                     <ul>
                         {doc2.map((item, index) => (
                             <li key={index}>{item}</li>
                         ))}
                     </ul>
             
-                    <br /><br />
                 </div>
             </div>
-        </div>   
+            <div className='container'>
+              <div className='row m-3'>
+                {
+                  (iguales) && (<h1>Los registros en ambos documentos son iguales...!</h1>)
+                }
+              </div>
+        </div>         
+      </div>  
     </>
   )
 }

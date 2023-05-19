@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { Spinner } from './hooks/Spinner';
+import React, { useRef, useState } from 'react';
 import { Comparar } from './hooks/Comparar';
+import 'animate.css';
 
 export const Comparador = () => {
-
-    const [visibilidad, setVisibilidad] = useState(false)
-
+    const endOfPageRef = useRef(null);
+    const [visibilidad, setVisibilidad] = useState(false);
     const [archivo1, setArchivo1] = useState(null);
     const [archivo2, setArchivo2] = useState(null);  
 
@@ -31,6 +30,11 @@ export const Comparador = () => {
 
     const visibilidadResultados = () => {
         setVisibilidad(true);
+        
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+          });
     }
 
     const resetearPagina = () => {
@@ -42,7 +46,7 @@ export const Comparador = () => {
             <br /><br />
             <div className='container'>
                 <div>
-                    <div className='text-center m-3'>
+                    <div className='text-center m-3 animate__animated animate__rubberBand'>
                         <h1>Comparador de Registros</h1>
                         <span>Compara registros entre 2 documentos..</span>
                     </div>
@@ -50,37 +54,37 @@ export const Comparador = () => {
                         <hr/>
                     </div>
                     <br />
-                    <h5>Formatos Soportados: TXT & CSV</h5>
+                    <h5 className='animate__animated animate__backInLeft'>Formatos Soportados: TXT & CSV</h5>
                     <br />
 
                     <div className='row'>
                         <div className='col-6'>
-                            <h3>Insertar Archivo 1:</h3>
+                            <h3 className='animate__animated animate__backInLeft'>Insertar Archivo 1:</h3>
                             <input 
-                                className='form-control'
+                                className='form-control animate__animated animate__backInLeft '
                                 type="file" 
                                 id="miArchivo1" 
                                 onChange={handleArchivoSeleccionado} 
                             /> 
                             <br />
 
-                            <h3>Insertar Archivo 2:</h3>
+                            <h3 className='animate__animated animate__backInLeft animate__faster'>Insertar Archivo 2:</h3>
                             <input 
-                                className='form-control'
+                                className='form-control animate__animated animate__backInLeft animate__faster'
                                 type="file" 
                                 id="miArchivo2" 
                                 onChange={handlerchivoSeleccionado2} 
                             />
                         </div>
                         
-                        <div className='col-6 text-center'>
-                            <img id='engranaje' src="https://firebasestorage.googleapis.com/v0/b/frontendportfolio-e949c.appspot.com/o/ComparadorRegistros%2FmichiTrabajando.gif?alt=media&token=dcf9e48c-9ebb-4dbe-bdc2-5b13c85bd8be" alt="MichiTrabajando" />
+                        <div className='col-6 text-center animate__animated animate__flash'>
+                            <img id='engranaje' src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2FmichiTrabajando.gif?alt=media&token=589fe6f1-1b8e-4885-88ef-b9464c819816" alt="MichiTrabajando" />
                         </div>
                     </div>
                 </div>                
             </div>
 
-            <div className='container'>
+            <div className="container">
                 <div className='col text-center mt-4'>
                     {(!visibilidad && archivo1 !== null && archivo2 !== null) && (
                         <button 
@@ -113,30 +117,31 @@ export const Comparador = () => {
                 {(visibilidad) && (<Comparar archivo1={archivo1} archivo2={archivo2}/>)}
             </div>
 
-            <div className='container'>
+            <div className='container animate__animated animate__backInUp'>
                 <div className='text-center m-5'>
                     <div className='svg'>
                         <h5>David Soto</h5>
                         <a                         
                             href="https://linkedin.com/in/david-soto-068716220" 
                             target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/frontendportfolio-e949c.appspot.com/o/ComparadorRegistros%2Flinkedin.svg?alt=media&token=8336955c-3526-464a-a1f4-a2abb3673397" alt="Linkedin"/>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Flinkedin.svg?alt=media&token=a86cf294-fbf0-4688-b332-d8e97770f624" alt="Linkedin"/>
                         </a>
 
                         <a  
                             href="https://github.com/davidsototest/ComparadorRegistros" 
                             target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/frontendportfolio-e949c.appspot.com/o/ComparadorRegistros%2Fgithub.svg?alt=media&token=8f238b03-23d6-4a96-8347-59cbc3d37de1" alt="Github"/>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Fgithub.svg?alt=media&token=06f70328-e3c8-4412-b230-3f8d1fd05fe7" alt="Github"/>
                         </a>
 
                         <a  
                             href="https://davidsoto.page" 
                             target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/frontendportfolio-e949c.appspot.com/o/ComparadorRegistros%2Fweb.svg?alt=media&token=30786a30-db96-40ef-998c-4a7bb65efe3a" alt="Github"/>
+                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Fweb.svg?alt=media&token=9278afac-0628-4635-b9e8-de3b4cacf893" alt="Portfolio"/>
                         </a>
                     </div>                    
                 </div>
             </div>
+            
         </>
     );
 }
