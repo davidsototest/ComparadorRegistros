@@ -43,43 +43,37 @@ export const Comparador = () => {
 
     return (
         <>
-            <br /><br />
+            <br /><br /><br /><br /><br />
             <div className='container'>
-                <div>
-                    <div className='text-center m-3 animate__animated animate__rubberBand'>
-                        <h1>Comparador de Registros</h1>
-                        <span>Compara registros entre 2 documentos..</span>
-                    </div>
-                    <div className="text-success">
-                        <hr/>
-                    </div>
-                    <br />
-                    <h5 className='animate__animated animate__backInLeft'>Formatos Soportados: TXT & CSV</h5>
-                    <br />
+                    
+                <br />
+                <h5 className='animate__animated animate__backInLeft'>Formatos Soportados: TXT & CSV</h5>
+                <br />
 
-                    <div className='row'>
-                        <div className='col-6'>
-                            <h3 className='animate__animated animate__backInLeft'>Insertar Archivo 1:</h3>
-                            <input 
-                                className='form-control animate__animated animate__backInLeft '
-                                type="file" 
-                                id="miArchivo1" 
-                                onChange={handleArchivoSeleccionado} 
-                            /> 
-                            <br />
+                <div className='row ms-3'>
+                    <div className='col-6'>
+                        <h3 className='animate__animated animate__backInLeft'>Insertar documento <span className='colorTitulo'>1</span>:</h3>
+                        <input 
+                            className='form-control mb-3 animate__animated animate__backInLeft'
+                            type="file" 
+                            id="miArchivo1" 
+                            onChange={handleArchivoSeleccionado} 
+                            disabled={visibilidad} 
+                        /> 
+                        <br />
 
-                            <h3 className='animate__animated animate__backInLeft animate__faster'>Insertar Archivo 2:</h3>
-                            <input 
-                                className='form-control animate__animated animate__backInLeft animate__faster'
-                                type="file" 
-                                id="miArchivo2" 
-                                onChange={handlerchivoSeleccionado2} 
-                            />
-                        </div>
-                        
-                        <div className='col-6 text-center animate__animated animate__flash'>
-                            <img id='engranaje' src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2FmichiTrabajando.gif?alt=media&token=589fe6f1-1b8e-4885-88ef-b9464c819816" alt="MichiTrabajando" />
-                        </div>
+                        <h3 className='animate__animated animate__backInLeft animate__faster'>Insertar documento <span className='colorTitulo'>2</span>:</h3>
+                        <input 
+                            className='form-control animate__animated animate__backInLeft animate__faster'
+                            type="file" 
+                            id="miArchivo2" 
+                            onChange={handlerchivoSeleccionado2}
+                            disabled={visibilidad}  
+                        />
+                    </div>
+                    
+                    <div className='col-6 text-center animate__animated animate__flash'>
+                        <img id='engranaje' src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Fcomparar.svg?alt=media&token=c9962d1a-71f0-4eaf-8eac-47feb9d3f898" alt="MichiTrabajando" />
                     </div>
                 </div>                
             </div>
@@ -109,39 +103,13 @@ export const Comparador = () => {
 
             <div className='container'>
                 <div className="text-success">
-                    <hr className='' />
+                    <hr className="border border-primary border-1 opacity-30"/>
                 </div>
             </div>
             
             <div className='m-3'>
                 {(visibilidad) && (<Comparar archivo1={archivo1} archivo2={archivo2}/>)}
-            </div>
-
-            <div className='container animate__animated animate__backInUp'>
-                <div className='text-center m-5'>
-                    <div className='svg'>
-                        <h5>David Soto</h5>
-                        <a                         
-                            href="https://linkedin.com/in/david-soto-068716220" 
-                            target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Flinkedin.svg?alt=media&token=a86cf294-fbf0-4688-b332-d8e97770f624" alt="Linkedin"/>
-                        </a>
-
-                        <a  
-                            href="https://github.com/davidsototest/ComparadorRegistros" 
-                            target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Fgithub.svg?alt=media&token=06f70328-e3c8-4412-b230-3f8d1fd05fe7" alt="Github"/>
-                        </a>
-
-                        <a  
-                            href="https://davidsoto.page" 
-                            target="_blank">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/comparadorregistros.appspot.com/o/ComparadorRegistros%2Fweb.svg?alt=media&token=9278afac-0628-4635-b9e8-de3b4cacf893" alt="Portfolio"/>
-                        </a>
-                    </div>                    
-                </div>
-            </div>
-            
+            </div>         
         </>
     );
 }

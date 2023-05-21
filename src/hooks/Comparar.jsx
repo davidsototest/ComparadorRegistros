@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { Spinner } from './Spinner';
+import 'animate.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Comparar = ({archivo1, archivo2}) => {
 
@@ -13,6 +15,7 @@ export const Comparar = ({archivo1, archivo2}) => {
     const [docRegistros1, setDocRegistros1] = useState(0);
     const [docRegistros2, setDocRegistros2] = useState(0);
 
+    useEffect(() => {
     //toda la logica de la app
     const compareFiles = () => {
         setLoading(true);
@@ -29,26 +32,36 @@ export const Comparar = ({archivo1, archivo2}) => {
             // Separa el contenido de ambos archivos por líneas
             const lines1 = content1.split('\n');
             const lines2 = content2.split('\n');
+            console.log(lines1);
+            console.log(lines2);
       
             // Verifica si todos los registros del archivo 1 están en el archivo 2
             for (let i = 0; i < lines1.length; i++) {
-              if (!lines2.includes(lines1[i])) {
-                setCantidad1(prevCantidad => prevCantidad + 1);
-                setDoc1(prevDoc1 => [...prevDoc1, lines1[i]]);
-              } else{setCantidad1(prevCantidad => prevCantidad + 1);}
+              const line = lines1[i].trim();
+              if (line !== ""){
+                setCantidad1(prevCantidad1 => prevCantidad1 +1);
+                if (!lines2.map(l => l.trim()).includes(line)) {
+                  setDoc1(prevDoc1 => [...prevDoc1, line]);
+                } 
+              }
             }
       
             // Verifica si todos los registros del archivo 2 están en el archivo 1
             for (let i = 0; i < lines2.length; i++) {
-              if (!lines1.includes(lines2[i])) {
-                setCantidad2(prevCantidad => prevCantidad + 1);
-                setDoc2(prevDoc2 => [...prevDoc2, lines2[i]]);
-              } else{setCantidad2(prevCantidad => prevCantidad + 1);}
+              const line = lines2[i].trim();
+              if (line !== ""){
+                setCantidad2(prevCantidad2 => prevCantidad2 +1);
+                if (!lines1.map(l => l.trim()).includes(line)) {
+                  setDoc2(prevDoc2 => [...prevDoc2, line]);
+                }
+              }
             }
               setLoading(false);     
           };         
-        }        
-      }
+        };       
+      };
+      compareFiles();
+    }, []);
 
       useEffect(() => {
         setDocRegistros1(doc1.length);
@@ -57,10 +70,6 @@ export const Comparar = ({archivo1, archivo2}) => {
       useEffect(() => {
         setDocRegistros2(doc2.length);
       }, [doc2]);
-
-      useEffect(() => {
-          compareFiles();
-      }, [archivo1, archivo2]);
 
       useEffect(() => {
         if ( loading !== true && docRegistros1 === 0 && docRegistros2 === 0 ){
@@ -72,55 +81,57 @@ export const Comparar = ({archivo1, archivo2}) => {
 
   return (
     <>
-        <div>
-            {(loading) && (<Spinner/>)}            
-        </div> <br />
+        <div className='mb-5'>
+          <div>
+              {(loading) && (<Spinner/>)}            
+          </div> <br />
 
-        <div className='card text-center mb-5'>
-            <div className='row m-3'>
-                <div className='col'>
-                    <h3>Documento 1</h3>
-                    <h6>Cant. registros totales: {cantidad1}</h6>
-                    <h6>Cant. de Registros no encontrados: {docRegistros1}</h6>
-                    <br />
-                    {
-                      (docRegistros1 > 0) && (<h6>Registros No encontrados:</h6>)
-                    }
-                    <ul>
-                        {doc1.map((item, index) => (
-                            <li key={index}>{item}</li>
-                    ))}
-                    </ul>
-                
-                
-                </div>
-
-
-                <div className='col'>
-                    <h3>Documento 2</h3>
-                    <h6>Cant. registros totales: {cantidad2}</h6>
-                    <h6>Cant. de Registros no encontrados: {docRegistros2}</h6>
-                    <br />
-                      {
-                        (docRegistros2 > 0) && (<h6>Registros No encontrados:</h6>)
-                      }
-
-                    <ul>
-                        {doc2.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}
-                    </ul>
-            
-                </div>
-            </div>
-            <div className='container'>
+          <div className='card text-center mb-5'>
               <div className='row m-3'>
-                {
-                  (iguales) && (<h1>Los registros en ambos documentos son iguales...!</h1>)
-                }
+                  <div className='col'>
+                      <h3>Documento <span className='colorTitulo'>1</span></h3>
+                      <h6><span>Total de Registros: <span className='colorTitulo'>{cantidad1}</span></span></h6>
+                      <h6><span>Registros no encontrados: <span className='colorTitulo'>{docRegistros1}</span></span></h6>
+                      <br />
+                      {
+                        (docRegistros1 > 0) && (<h6>Lista de Registros:</h6>)
+                      }
+                      <ul>
+                          {doc1.map((item, index) => (
+                              <li key={index}>{item}</li>
+                      ))}
+                      </ul>
+                  
+                  
+                  </div>
+
+
+                  <div className='col'>
+                      <h3>Documento <span className='colorTitulo'>2</span></h3>
+                      <h6><span>Total de Registros: <span className='colorTitulo'>{cantidad2}</span></span></h6>
+                      <h6><span>Registros no encontrados: <span className='colorTitulo'>{docRegistros2}</span></span></h6>
+                      <br />
+                        {
+                          (docRegistros2 > 0) && (<h6>Lista de Registros:</h6>)
+                        }
+
+                      <ul>
+                          {doc2.map((item, index) => (
+                              <li key={index}>{item}</li>
+                          ))}
+                      </ul>
+              
+                  </div>
               </div>
-        </div>         
-      </div>  
+              <div className='container mb-3'>
+                <div className='row m-3'>
+                  {
+                    (iguales) && (<h1 className='colorTitulo'>Los registros en ambos documentos son iguales...!</h1>)
+                  }
+                </div>
+          </div>         
+        </div>   
+        </div> <br /><br />
     </>
   )
 }

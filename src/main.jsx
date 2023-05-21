@@ -1,10 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
+// import './index.css'
 import { Comparador } from './Comparador.jsx'
+import { Header } from './hooks/Header'
+import { Footer } from './hooks/Footer'
+import './styles/custom.css';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  
+  <>
+    <Header/>
     <Comparador/>
-  </React.StrictMode>,
+    <Footer/>
+  </>,
+    
+  {/* </React.StrictMode>, */}
 )

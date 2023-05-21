@@ -1,17 +1,21 @@
-body {
-    /* background-color: #f0eeee; */
-    background: rgb(163,163,163);
-    background: linear-gradient(139deg, rgba(163,163,163,1) 0%, rgba(240,238,238,1) 9%, rgba(240,238,238,1) 90%, rgba(170,170,170,1) 100%);
+/* body {
+    background-color: #f0eeee;
     color: #2b2c36;
   }
 
 .card {
     background-color: #f0eeee;
     color: #2b2c36;
+    border: 1px solid #6C63FF;
+}
+
+.colorTitulo {
+    color: #6C63FF;
+    font-weight: bold;
 }
 
 #engranaje{
-    width: 220px;
+    width: 70%;
     border-radius: 3%;
 }
 
@@ -21,20 +25,37 @@ a {
 }
 
 a:hover {
-    padding: 6px;
     border-radius: 50%;
-    background-color: #dbdbdb;
+    background-color: #c1c0c0;
 }
 
-.barra{
-    background-color: #5C469C;
-}
+/* .barra{
+    background-color: #6C63FF;
+} */
 
-.svg img{
+/*.svg img{
     width: 25px;
-    margin: 10px;
+    margin: -19px 10px 0px 10px;
 }
 
 ul {
     list-style-type: none;
 }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f0eeee;
+    z-index: 999;
+  }
+
+  .footer {
+    position: fixed;
+    top: 91%;
+    left: 0;
+    width: 100%;
+    background: #f0eeee;
+    z-index: 999;
+  } */
