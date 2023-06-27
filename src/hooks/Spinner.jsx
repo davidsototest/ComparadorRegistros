@@ -3,6 +3,7 @@ import { ClipLoader } from 'react-spinners';
 import React from 'react'
 import 'animate.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Box, LinearProgress, Typography } from '@mui/material';
 
 export const Spinner = () => {
 
@@ -14,14 +15,14 @@ export const Spinner = () => {
 
   return (
     <>
-      <div className='row'>
-          <div className='col text-center'>
-              <br />
-              <h5>Trabajando, Por favor espere . . .</h5>
-              <br />
-              <ClipLoader color="#6C63FF" loading={true} css={override} size={50} />
-          </div>
-      </div>
-    </>
+    <div className='row'>
+        <div className='col text-center'>
+            {/* <br /> */}
+            <h5>Trabajando, Por favor espere . . .</h5>
+            <br />
+            <ClipLoader color="#6C63FF" loading={true} css={override} size={50} />
+        </div>
+    </div>
+  </>
   )
 }
