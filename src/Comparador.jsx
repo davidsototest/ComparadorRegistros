@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Comparar } from './hooks/Comparar';
 import 'animate.css';
+import Swal from 'sweetalert2';
 
 export const Comparador = () => {
     const endOfPageRef = useRef(null);
@@ -18,7 +19,20 @@ export const Comparador = () => {
                 setNameDoc1(archivoSeleccionado.name);
             } 
             else{
-                alert("las unicas extenciones aceptadas son: TXT & CSV");
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Las unicas extenciones soportadas son: TXT & CSV',
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                        title: 'colorTitulo',
+                        confirmButton: 'btn btn-primary m-3'
+                      }
+                  }).then(() => {
+                    // limpio el input
+                    event.target.value = '';
+                  });
             }
     };
 
@@ -29,7 +43,20 @@ export const Comparador = () => {
                 setNameDoc2(archivoSeleccionado2.name);
             } 
             else{
-                alert("las unicas extenciones aceptadas son: TXT & CSV");
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Las unicas extenciones soportadas son: TXT & CSV',
+                    icon: 'error',
+                    buttonsStyling: false,
+                    confirmButtonText: 'Aceptar',
+                    customClass: {
+                        title: 'colorTitulo',
+                        confirmButton: 'btn btn-primary m-3'
+                      }
+                  }).then(() => {
+                    // limpio el input
+                    event.target.value = '';
+                  });
             }
     };
 
